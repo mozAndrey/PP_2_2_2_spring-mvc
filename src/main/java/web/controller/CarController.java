@@ -34,7 +34,7 @@ public class CarController {
         cars.add(car5);
         carService.fillTableOfCars(cars);
         model.addAttribute("createTable", carService.getCars());
-        return "carsAdded";
+        return "redirect:/";
     }
 
     @GetMapping(value = "/cars")

@@ -16,34 +16,24 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/cars")
 public class CarController {
+
+    private CarService carService;
+
     @Autowired
-    CarService carService;
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @RequestMapping(value = "/cars.html")
     public String createCarList(Model model) {
-        Car car1 = new Car("Black", "Bl", 1);
-        Car car2 = new Car("White", "Wh", 2);
-        Car car3 = new Car("Yellow", "Ye", 3);
-        Car car4 = new Car("Pink", "Pi", 4);
-        Car car5 = new Car("Grey", "Gr", 5);
-        List<Car> cars = new ArrayList<>();
-        cars.add(car1);
-        cars.add(car2);
-        cars.add(car3);
-        cars.add(car4);
-        cars.add(car5);
-        carService.fillTableOfCars(cars);
+        carService.fillTableOfCars();
         model.addAttribute("createTable", carService.getCars());
         return "redirect:/";
     }
 
     @GetMapping(value = "/cars")
     public String showCarList(@RequestParam(value = "count", required = false) Integer count, Model model) {
-        if (count == null) {
-            model.addAttribute("showTable", carService.getCars());
-        } else {
-            model.addAttribute("showTable", carService.getCountOfCars(count));
-        }
+        model.addAttribute("showTable", carService.getCountOfCars(count));
         return "cars";
     }
 

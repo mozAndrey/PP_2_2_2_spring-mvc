@@ -12,7 +12,7 @@ public interface CarService {
 
     Integer getAmountOfCars();
 
-    void fillTableOfCars(List<Car> list);
+    void fillTableOfCars();
 
     List<Car> getCountOfCars(Integer count);
 
